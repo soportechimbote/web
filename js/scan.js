@@ -82,7 +82,7 @@ const encenderCamara = () => {
 			target: document.querySelector('#contenedorCB'), // Pasar el elemento del DOM
 		},
 		decoder: {
-			readers: ["ean_reader"]
+			readers: ["code_128_reader"]
 		}
 	}, function (err) {
 		if (err) {
