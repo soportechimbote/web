@@ -97,5 +97,6 @@ const encenderCamara = () => {
 
 	Quagga.onDetected((data) => {
         document.getElementById('text-buscar').value =   data.codeResult.code;
+	alert(data.codeResult.code);
 	});
 }
