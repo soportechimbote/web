@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equipos Informáticos - Soporte Técnico</title>
+    <link rel="shortcut icon" href="img/favicon.ico">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/estilo.css">
+    <link rel="stylesheet" href="css/estilo-equ.css">
+    
+</head>
+<body>
+    <div id="contenedor_carga">
+        <div id="carga">
+        </div>
+    </div>
+    <!-- navBar -->
+    <nav class="navbar navbar-expand navbar-dark bg-dark fixed-top">
+        <div class="container-fluid">
+            <span class="navbar-brand text-truncate">Soporte Técnico</span>    
+            <button class="btn btn-link btn-sm text-white" type="button" data-bs-toggle="collapse" data-bs-target="#barraLateral" aria-expanded="false" aria-controls="barraLateral">
+                <i class="bi bi-distribute-vertical"></i>
+            </button>
+            <ul class="navbar-nav ms-auto ml-auto ml-md-0">
+            <li class="nav-item dropdown no-arrow">
+                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <span id="nUsuario"> </span> <i class="bi bi-sliders"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown" data-bs-popper="static">
+                    <a class="dropdown-item" href="#">Configurar</a>
+                    <a class="dropdown-item" href="#">Mi información</a>
+                    <a class="dropdown-item" href="#">Registro de actividades</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#logoutModal">Cerrar Sesion</a>
+                </div>
+            </li>
+            </ul>  
+        </div>
+    </nav>
+    <!-- /navBar -->
+    <div class="container-fluid ptn-3m">
+        <div class="row">
+            <div class="barra-lateral col-sm-auto collapse show" id="barraLateral">
+                <nav class="menu d-flex d-sm-block justify-content-center flex-wrap">
+                    <a href="home.html"><i class="bi bi-house-door-fill"></i><span>Inicio</span></a>
+                    <a href="equipo.html" class="active"><i class="bi bi-pc-display"></i><span>Dispositivos</span></a>
+                    <a href="herramientas.html"><i class="bi bi-tools"></i><span>Herramientas</span></a>
+                    <a href="acercade.html"><i class="bi bi-info-circle"></i><span>Acerca de</span></a>
+                </nav>
+            </div>
+            <!-- Contenido -->
+            <main class="main col">
+                <div class="row justify-content-center align-content-center text-center">
+                    <div class="container-fluid">
+                        <div class="row nav-titulo">
+                            <ul class="nav nav-pills">
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="#"><i class="bi bi-pc"></i> Agregar Equipo</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#"><i class="bi bi-pass-fill"></i> Asignar equipo</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#"><i class="bi bi-arrow-left-right"></i>Cambio de equipo</a>
+                                </li>
+                                <!-- <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle active" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Dropdown</a>
+                                    <ul class="dropdown-menu">
+                                      <li><a class="dropdown-item" href="#">Action</a></li>
+                                      <li><a class="dropdown-item" href="#">Another action</a></li>
+                                      <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                      <li><hr class="dropdown-divider"></li>
+                                      <li><a class="dropdown-item" href="#">Separated link</a></li>
+                                    </ul>
+                                </li> -->
+                                <!-- <li class="nav-item">
+                                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                                </li> -->
+                                <!-- <li class="nav-item">
+                                    <a class="nav-link" href="#">Link</a>
+                                </li> -->
+                                
+                            </ul>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-sm-6 mt-1">
+                                <select class="form-select" id="filtro-equipo" aria-label="Default select example">
+                                    <option value="0">Seleccione Filtro...</option>
+                                    <option value="1" selected>Todos los equipos</option>
+                                    <option value="2" disabled>Desktop</option>
+                                    <option value="adm">Administrativo</option>
+                                    <option value="aul">Aulas</option>
+                                    <option value="labc">Laboratorio de Computo</option>
+                                </select>
+                            </div>
+                            <div class="col-12 col-sm-6 mt-1">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" id="text-buscar" placeholder="Buscar equipo..." aria-label="Buscar equipo" aria-describedby="button-addon2">
+                                    <button class="btn btn-primary" type="button" id="buscar-text"><i class="bi bi-search"></i></button>
+                                    <button class="btn btn-primary" type="button" id="buscar-qr" data-bs-toggle="modal" data-bs-target="#forQR"><i class="bi bi-qr-code-scan"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" id="listaEquipos">
+                            <div class="col-12 pb-2">
+                                <div class="pag-card">
+                                    <div class="pag-card-body position-relative">
+                                        <div class="row">
+                                            <div class="col-7 col-md-6">
+                                                <div class="row">
+                                                    <div class="col-sm-2 p-0 justify-content-center align-items-center">                                                        
+                                                        <div class="fw-normal text-truncate des-tipo-equipo"></div>
+                                                    </div>
+                                                    <div class="col-sm-10 text-start">
+                                                        <div class="text-truncate">
+                                                            <p class="d-inline fw-bold fs-5"><span class="loader1"></span></p>
+                                                            <div class="d-inline text-truncate small">                                                                
+                                                            </div>
+                                                            <div class="d-block text-truncate small">                                                                
+                                                            </div>
+                                                        </div>                                                         
+                                                    </div>
+                                                </div>                        
+                                            </div>
+                                            <div class="col-5 col-md-6 text-start">
+                                                <p class="d-inline small des-modelo-equipo"></p>
+                                                <div class="fs-6 text-truncate">
+                                                    <p class="d-inline text-secondary smaller"></p>
+                                                    <p class="d-inline text-info small"></p>
+                                                </div>                                                                                                                                               
+                                            </div>                                            
+                                        </div>  
+                                        <div class="position-absolute bottom-0 end-0 m-2">                                          
+                                        </div>              
+                                    </div>
+                                </div>                                
+                            </div>                          
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div id="loader-equipo" class="text-center d-none" valorScroll="1">
+                                    <span class="loader"></span>
+                                    <br>
+                                    <div id="valScroll" valorScroll="0"></div>Cargando Registros...
+                                </div>
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+            </main>
+            <!-- //contenido -->
+            
+        </div>
+    </div>
+    
+    <!-- Modal Cerrar sesión -->
+    <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="exampleModalLabel" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Desea cerrar sesión?</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">Seleccione "Cerrar" si está listo para finalizar su sesión actual.</div>
+            <div class="modal-footer">
+              <a class="btn btn-primary" href="#" id="closeApp">Cerrar</a>
+            </div>
+          </div>
+        </div>
+    </div>
+    <!-- /Modal Cerrar sesión -->
+    <!-- Offcanva Hoja de vida -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="hojavidacanva" aria-labelledby="hojavidacanvaLabel">
+        <div class="offcanvas-header">
+          <h5>Hoja de Vida</h5>
+          <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body pt-0">
+            <div class="card-body text-center mb-2"> 
+                <img class="img-account-profile mb-2" id="selImgEqu" src="" alt="">
+                <div>
+                    <h5 class="d-inline" id="selCodPatr" idequipo="">***-*******</h5> 
+                    <p class="d-inline small text-truncate" id="selTipEqu"> </p>
+                </div>                
+                <div class="small font-italic text-truncate"><p class="d-inline" id="selModeloEqui"> </p> <p class="d-inline text-info" id="selSerieEqui"></p></div>
+                <div class="small text-truncate" id="selDesEqui"></div>
+                <button type="button" class="btn btn-primary mt-2 d-none" id="generarPDF">
+                    <i class="bi bi-printer-fill"></i> Imprimir
+                </button>
+            </div>
+            <div id="listaHV">
+                <div class="row ps-3 pe-3 mb-1">                
+                    <div class="list-group w-100 p-0">
+                        <div class="list-group-item list-group-item-action border itemHV">
+                            <div class="container">
+                                <div class="row justify-content-center">
+                                       <span class="loader3"></span> 
+                                </div>   
+                            </div>      
+                        </div>
+                    </div>
+                </div>
+            </div>            
+            <div class="btn-plus">
+                <a href="javascript:void(0);" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#forItemHV" id="btnNuevoHV" marcaid="">
+                  <i class="bi bi-plus-lg" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Agregar Item a la Hoja de Vida del Equipo"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- /Offcanva Hoja de vida -->
+    <!-- Modal item Hoja de vida -->
+    <div class="modal fade" id="forItemHV" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Nuevo registro - <strong id="codPatHV">***-*****</strong></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                          <label for="codRefHV" class="form-label">Cód. Referencia:</label>
+                          <input type="text" class="form-control" id="codRefHV" value="DTI-00000">
+                        </div>
+                        <div class="form-group col-md-6">
+                          <label for="fechaHV" class="form-label">Fecha y Hora:</label>                          
+                          <input type="datetime-local" class="form-control" id="fechaHV" autocomplete="off" placeholder="dd/mm/yyyy hh:mm">                                                   
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="accionHV">Acción:</label>
+                        <textarea class="form-control" id="accionHV" rows="1"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="descrHV">Descripción:</label>
+                        <textarea class="form-control" id="descrHV" rows="1"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="obserHV">Observación:</label>
+                        <textarea class="form-control" id="obserHV" rows="1"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" id="gbrItemHV">Grabar información</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Modal item Hoja de vida -->    
+    <!-- Modal scan codigo de barras y qr -->
+    <div class="modal fade" id="forQR"  data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Escaneo de Código</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="cerrarForQR"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row text-center">
+                        <div id="contenedorCB" class="w-100"></div>
+                        <canvas hidden="" id="qr-canvas" class="img-fluid"></canvas>
+                    </div>
+                    <div class="row mx-5 my-3">
+                        <button class="btn btn-success btn-sm rounded-3 mb-2" id="btnScanCB">Encender camara - código de barras</button>
+                        <button class="btn btn-secondary btn-sm rounded-3" id="btnScanQR">Encender camara - código QR</button>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="cerrarForQR2">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Modal scan codigo de barras y qr -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"></script>
+    <script src="js/plugins/qrCode.min.js"></script>    
+    <script src="js/plugins/quagga.min.js"></script> 
+    <script src="js/app.js"></script><script src="js/equipo.js"></script>
+</body>
+</html>
